@@ -1,0 +1,70 @@
+# Código de procesamiento de archivos para el proyecto TFM AMAZONAS
+# Autor: Jorge Trujillo
+# Descripción: Este script procesa y renombra archivos relacionados con zonas sísmicas de Perú.
+# Las rutas de los directorios de origen y destino se cargan de un archivo .env para mayor seguridad.
+
+import os
+from dotenv import load_dotenv
+
+# Cargar las variables de entorno desde el archivo .env
+load_dotenv()
+
+# Rutas de carpetas obtenidas de las variables de entorno
+source_folder = os.getenv("SOURCE_FOLDER")
+destination_folder = os.getenv("DESTINATION_FOLDER")
+
+# Crear la carpeta de destino si no existe
+os.makedirs(destination_folder, exist_ok=True)
+
+# Información de los ficheros y sus correspondientes Source Name
+files_info = [
+    ('4,5_CatZonesPerucatalog1.txt', 'F9'),
+    ('4,5_CatZonesPerucatalog2.txt', 'F10'),
+    ('4,5_CatZonesPerucatalog3.txt', 'F11'),
+    ('4,5_CatZonesPerucatalog4.txt', 'F12'),
+    ('4,5_CatZonesPerucatalog5.txt', 'F13'),
+    ('4,5_CatZonesPerucatalog6.txt', 'F14'),
+    ('4,5_CatZonesPerucatalog7.txt', 'F15'),
+    ('4,5_CatZonesPerucatalog8.txt', 'F16'),
+    ('4,5_CatZonesPerucatalog9.txt', 'F17'),
+    ('4,5_CatZonesPerucatalog10.txt', 'F18'),
+    ('4,5_CatZonesPerucatalog11.txt', 'F19'),
+    ('4,5_CatZonesPerucatalog12.txt', 'F1'),
+    ('4,5_CatZonesPerucatalog13.txt', 'F2'),
+    ('4,5_CatZonesPerucatalog14.txt', 'F3'),
+    ('4,5_CatZonesPerucatalog15.txt', 'F4'),
+    ('4,5_CatZonesPerucatalog16.txt', 'F5'),
+    ('4,5_CatZonesPerucatalog17.txt', 'F6'),
+    ('4,5_CatZonesPerucatalog18.txt', 'F7'),
+    ('4,5_CatZonesPerucatalog19.txt', 'F8'),
+    ('4,5_CatZonesPerucatalog20.txt', 'F20'),
+    ('4,5_CatZonesPerucatalog21.txt', 'F21'),
+    ('4,5_CatZonesPerucatalog22.txt', 'F22'),
+    ('4,5_CatZonesPerucatalog23.txt', 'F23'),
+    ('4,5_CatZonesPerucatalog24.txt', 'F24'),
+    ('4,5_CatZonesPerucatalog25.txt', 'F25'),
+    ('4,5_CatZonesPerucatalog26.txt', 'F26'),
+    ('4,5_CatZonesPerucatalog27.txt', 'F27'),
+    ('4,5_CatZonesPerucatalog28.txt', 'F28'),
+    ('4,5_CatZonesPerucatalog29.txt', 'F29'),
+    ('4,5_CatZonesPerucatalog30.txt', 'F30'),
+    ('4,5_CatZonesPerucatalog31.txt', 'F31'),
+    ('4,5_CatZonesPerucatalog32.txt', 'F32'),
+    ('4,5_CatZonesPerucatalog33.txt', 'F33'),
+]
+
+# Procesar cada archivo
+for original_filename, source_name in files_info:
+    source_path = os.path.join(source_folder, original_filename)
+    new_filename = f'{source_name}.txt'
+    destination_path = os.path.join(destination_folder, new_filename)
+    
+    # Leer el contenido original del archivo
+    with open(source_path, 'r') as file:
+        content = file.read()
+    
+    # Escribir el contenido en el nuevo archivo con el nuevo nombre
+    with open(destination_path, 'w') as file:
+        file.write(content)
+
+print("Archivos procesados y renombrados en la nueva carpeta.")
